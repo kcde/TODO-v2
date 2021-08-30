@@ -1,24 +1,16 @@
-import logo from './logo.svg';
+import { Box, Button, Text, useColorModeValue, useColorMode } from '@chakra-ui/react';
+import Banner from './components/ui/banner';
 import './App.css';
 
 function App() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const bg = useColorModeValue('todoGray.100', 'todoBlue.700');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box bg={bg} h="100vh">
+      <Banner />
+      <Text onClick={toggleColorMode}>TODO v2</Text>;
+    </Box>
   );
 }
 
