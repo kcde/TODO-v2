@@ -7,13 +7,17 @@ const TodoInput = () => {
   const focusHandler = () => {
     inputBox.current.focus();
   };
+
+  const caretColor = 'hsl(220, 98%, 61%)';
+  const color = useColorModeValue('todoBlue.700', 'todoGray.100');
   return (
     <Flex
       py={{ base: '14px', lg: '20px' }}
       pl={{ base: '20px', lg: '24px' }}
-      bg={useColorModeValue('todoGray.100', 'todoBlue.600')}
+      mb={{ base: '16px', lg: '24px' }}
+      bg={useColorModeValue('white', 'todoBlue.600')}
       alignItems="center"
-      borderRadius="base"
+      borderRadius="md"
     >
       <Box onClick={() => focusHandler()}>
         {' '}
@@ -21,13 +25,11 @@ const TodoInput = () => {
       </Box>
       <Input
         type="text"
-        color="todoBlue.700"
+        color={color}
         variant="unstyled"
         fontSize={{ base: '12px', lg: '18px' }}
-        fontWeight="bold"
         placeholder="Create a new todo...."
-        caretStyle="none"
-        style={{ caretColor: 'todoBlue.main' }}
+        style={{ caretColor: caretColor }}
         ref={inputBox}
       />
     </Flex>

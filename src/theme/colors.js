@@ -1,6 +1,8 @@
 const colors = {
-  black: 'hsl(235, 21%, 11%)',
-  white: 'hsl(0, 0%, 98%)',
+  todoGradient: {
+    blue: 'hsl(192, 100%, 67%)',
+    pink: 'hsl(280, 87%, 65%)',
+  },
 
   todoGray: {
     100: 'hsl(0, 0%, 98%)',

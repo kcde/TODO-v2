@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Spacer, Box, Heading } from '@chakra-ui/react';
+import { Flex, Spacer, Heading } from '@chakra-ui/react';
 import ThemeToggle from '../themeToggle';
 
 const Header = () => (
