@@ -4,11 +4,12 @@ import bgDesktopLight from './assets/bg/bg-desktop-light.jpg';
 import bgMobileDark from './assets/bg/bg-mobile-dark.jpg';
 import bgDesktopDark from './assets/bg/bg-desktop-dark.jpg';
 import Header from './components/header/header';
+import TodoInput from './components/todoInput/todoInput';
 import './App.css';
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue('todoGray.100', 'todoBlue.700');
+  const bg = useColorModeValue('todoBlue.100', 'todoBlue.700');
   const backgroundImageSelector = (colorMode) => {
     switch (colorMode) {
       case 'light':
@@ -41,9 +42,8 @@ function App() {
       pt={{ base: '48px', lg: '70px' }}
     >
       <Container maxW="container.lg" p="0">
-        {/* hdgszhdgj */}
         <Header />
-        hhfhf
+        <TodoInput />
       </Container>
     </Box>
   );

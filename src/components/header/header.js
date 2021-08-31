@@ -9,7 +9,7 @@ const Header = () => (
       textColor="todoGray.100"
       fontWeight="700"
       letterSpacing="15px"
-      fontSize={{ base: '20px', lg: '45px' }}
+      fontSize={{ base: '20px', lg: '43px' }}
     >
       TODO
     </Heading>
