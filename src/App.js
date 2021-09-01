@@ -1,6 +1,7 @@
 import {
   Box,
   Container,
+  Text,
   Flex,
   useColorModeValue,
   useColorMode,
@@ -48,7 +49,8 @@ function App() {
   return (
     <Box
       bgColor={bg}
-      h="100vh"
+      minHeight="100vh"
+      overflow="scroll"
       bgImage={{ base: bgImage.mobile, sm: bgImage.desktop }}
       bgRepeat="no-repeat"
       bgSize="100%"
@@ -79,6 +81,14 @@ function App() {
             </Flex>
           ) : null
         }
+
+        <Text
+          color={useColorModeValue('todoGray.400', 'todoBlue.400')}
+          mt={{ base: '40px', lg: '49px' }}
+          align="center"
+        >
+          Drag and drop to reorder list
+        </Text>
       </Container>
     </Box>
   );
