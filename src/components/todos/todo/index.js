@@ -4,7 +4,6 @@ import { CloseIcon } from '@chakra-ui/icons';
 import TodoCheck from './todoCheck';
 
 const Todo = ({ completed }) => {
-  completed = true;
   const bg = useColorModeValue('white', 'todoBlue.600');
   const [hover, setHover] = useState(false);
   const closeIconColor = useColorModeValue('todoBlue.200', 'todoBlue.400');

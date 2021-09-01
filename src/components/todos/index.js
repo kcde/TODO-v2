@@ -4,7 +4,7 @@ import Todo from './todo';
 
 const Todos = () => {
   return (
-    <Box borderRadius="md" style={{ overflow: 'hidden' }}>
+    <Box>
       <Todo />
       <Todo />
       <Todo />
