@@ -6,13 +6,22 @@ My aim is to use this project to learn some technology and implemement ones i've
 
 I plan on using react and chakra ui for the client side, redux for stage management(i know! it's an overkill) and firebase for server side
 
-I want users to be able to create acounts and save their list. This would also be PWA.(fingers crossed)
+I want users to be able to create acounts and save their list. This would also be PWA.(🤞)
 
 ## Tech Stack
 
 **Client:** React, Chakra ui, Redux
 
 **Server:** Firebase
+
+## Checklist
+
+- [x] Build UI
+- [ ] Make components functional
+- [ ] Add store using redux
+- [ ] Hook up to firebase
+- [ ] Add authentication and authorization
+- [ ] Add PWA requirements
 
 ## Lessons Learned
 
