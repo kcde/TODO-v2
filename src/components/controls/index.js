@@ -19,7 +19,11 @@ const Controls = () => {
       {isLargerThan992 ? <Filters /> : null}
       <Spacer />
 
-      <Text _hover={{ color: useColorModeValue('todoBlue.700', 'todoGray.100') }} cursor="pointer">
+      <Text
+        _hover={{ color: useColorModeValue('todoBlue.700', 'todoGray.100') }}
+        cursor="pointer"
+        onClick={() => console.log('all completed cleared')}
+      >
         Clear Completed
       </Text>
     </Flex>

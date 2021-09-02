@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Flex, Input, useColorModeValue } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 
 const TodoInput = () => {
+  const [textValue, setTextValue] = useState('');
   const inputBox = useRef();
   const focusHandler = () => {
     inputBox.current.focus();
@@ -24,6 +25,8 @@ const TodoInput = () => {
         <EditIcon h="24px" w="24px" color="todoBlue.200" mr={{ base: '12px', lg: '24px' }} />
       </Box>
       <Input
+        value={textValue}
+        onChange={(e) => setTextValue(e.target.value)}
         type="text"
         color={color}
         variant="unstyled"

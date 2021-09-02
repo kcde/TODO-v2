@@ -3,7 +3,7 @@ import { Flex, Text, Box, useColorModeValue, Spacer } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import TodoCheck from './todoCheck';
 
-const Todo = ({ completed }) => {
+const Todo = ({ task }) => {
   const bg = useColorModeValue('white', 'todoBlue.600');
   const [hover, setHover] = useState(false);
   const closeIconColor = useColorModeValue('todoBlue.200', 'todoBlue.400');
@@ -21,17 +21,23 @@ const Todo = ({ completed }) => {
       onMouseLeave={() => setHover(false)}
     >
       <Box pr={{ base: '12px', lg: '24px' }}>
-        <TodoCheck checked={completed} />
+        <TodoCheck checked={task.completed} />
       </Box>
       <Text
-        color={completed ? completedColor : color}
+        color={task.completed ? completedColor : color}
         fontSize={{ base: '12px', lg: '18px' }}
-        as={completed ? 's' : null}
+        as={task.completed ? 's' : null}
       >
         My todo
       </Text>
       <Spacer />
-      {hover ? <CloseIcon color={closeIconColor} alignSelf="center" /> : null}
+      {hover ? (
+        <CloseIcon
+          color={closeIconColor}
+          alignSelf="center"
+          onClick={() => console.log('deleted')}
+        />
+      ) : null}
     </Flex>
   );
 };

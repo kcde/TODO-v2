@@ -5,10 +5,10 @@ import Todo from './todo';
 const Todos = () => {
   return (
     <Box>
+      <Todo task={{ completed: true }} />
+      {/* <Todo />
       <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
+      <Todo /> */}
     </Box>
   );
 };
