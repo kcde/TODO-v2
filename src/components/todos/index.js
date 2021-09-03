@@ -5,20 +5,23 @@ import Todo from './todo';
 
 const Todos = () => {
   const todos = useSelector((state) => state.TodoList);
-  // const todoFilter = (filter) =>{
-  //   switch(filter){
-  //     case 'active':
-  //       return todos.filter(todo => !todo.isComplete)
-  //     case 'completed':
-  //       return todos.filter(todo =>todo.isComplete)
-  //       default:
-  //         return todos
-  //   }
-  // }
+  const filter = useSelector((state) => state.filter);
+  const todoFilter = (filter) => {
+    switch (filter) {
+      case 'ALL':
+        return todos;
+      case 'ACTIVE':
+        return todos.filter((todo) => !todo.completed);
+      case 'COMPLETED':
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
+  };
   return (
     <Box>
       {/* <Todo task={{ completed: true }} /> */}
-      {todos.map((todo) => (
+      {todoFilter(filter).map((todo) => (
         <Todo task={todo} key={todo.id} />
       ))}
     </Box>

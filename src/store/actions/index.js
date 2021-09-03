@@ -18,8 +18,23 @@ export const complete_todo = (id) => {
     payload: id,
   };
 };
-export const clear_completed = (id) => {
+export const clear_completed = () => {
   return {
     type: actionTypes.clear_completed,
+  };
+};
+export const filter_all = () => {
+  return {
+    type: actionTypes.filter_all,
+  };
+};
+export const filter_active = () => {
+  return {
+    type: actionTypes.filter_active,
+  };
+};
+export const filter_completed = () => {
+  return {
+    type: actionTypes.filter_completed,
   };
 };

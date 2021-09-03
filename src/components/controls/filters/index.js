@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as actions from '../../../store/actions';
 import { Text, Stack, useColorModeValue } from '@chakra-ui/react';
 
 const Filters = () => {
-  const [activeId, setActiveId] = useState(1);
-
+  const [activeId, setActiveId] = useState(0);
+  const dispatch = useDispatch();
   const textColor = useColorModeValue('todoBlue.700', 'todoGray.100');
   const clickHandler = (id) => {
     setActiveId(id);
@@ -15,21 +17,21 @@ const Filters = () => {
       id: 0,
       name: 'all',
       action: () => {
-        console.log('all todo');
+        dispatch(actions.filter_all());
       },
     },
     {
       id: 1,
       name: 'active',
       action: () => {
-        console.log('active todo');
+        dispatch(actions.filter_active());
       },
     },
     {
       id: 2,
       name: 'completed',
       action: () => {
-        console.log('complete todo');
+        dispatch(actions.filter_completed());
       },
     },
   ];
