@@ -6,12 +6,16 @@ import { ChakraProvider } from '@chakra-ui/react';
 import '@fontsource/josefin-sans/400.css';
 import '@fontsource/josefin-sans/700.css';
 import theme from './theme';
+import { Provider } from 'react-redux';
+import store from './store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider resetCSS={true} theme={theme}>
-      <App />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider resetCSS={true} theme={theme}>
+        <App />
+      </ChakraProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

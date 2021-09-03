@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import * as actions from '../../../store/actions';
+import { useDispatch } from 'react-redux';
 import { Flex, Text, Box, useColorModeValue, Spacer } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import TodoCheck from './todoCheck';
 
 const Todo = ({ task }) => {
+  const dispatch = useDispatch();
   const bg = useColorModeValue('white', 'todoBlue.600');
   const [hover, setHover] = useState(false);
   const closeIconColor = useColorModeValue('todoBlue.200', 'todoBlue.400');
@@ -20,7 +23,10 @@ const Todo = ({ task }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Box pr={{ base: '12px', lg: '24px' }}>
+      <Box
+        pr={{ base: '12px', lg: '24px' }}
+        onClick={() => dispatch(actions.complete_todo(task.id))}
+      >
         <TodoCheck checked={task.completed} />
       </Box>
       <Text
@@ -28,14 +34,14 @@ const Todo = ({ task }) => {
         fontSize={{ base: '12px', lg: '18px' }}
         as={task.completed ? 's' : null}
       >
-        My todo
+        {task.task}
       </Text>
       <Spacer />
       {hover ? (
         <CloseIcon
           color={closeIconColor}
           alignSelf="center"
-          onClick={() => console.log('deleted')}
+          onClick={() => dispatch(actions.remove_todo(task.id))}
         />
       ) : null}
     </Flex>
