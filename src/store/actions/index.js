@@ -18,3 +18,8 @@ export const complete_todo = (id) => {
     payload: id,
   };
 };
+export const clear_completed = (id) => {
+  return {
+    type: actionTypes.clear_completed,
+  };
+};
