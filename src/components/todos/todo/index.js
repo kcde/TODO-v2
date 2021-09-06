@@ -5,7 +5,7 @@ import { Flex, Text, Box, useColorModeValue, Spacer } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import TodoCheck from './todoCheck';
 
-const Todo = ({ task }) => {
+const Todo = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const bg = useColorModeValue('white', 'todoBlue.600');
   const [hover, setHover] = useState(false);
@@ -22,30 +22,34 @@ const Todo = ({ task }) => {
       borderColor={useColorModeValue('todoBlue.200', 'todoBlue.400')}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      {...props.propsdraghandle}
+      {...props.propsdraggable}
+      ref={ref}
     >
       <Box
         pr={{ base: '12px', lg: '24px' }}
-        onClick={() => dispatch(actions.complete_todo(task.id))}
+        onClick={() => dispatch(actions.complete_todo(props.task.id))}
       >
-        <TodoCheck checked={task.completed} />
+        <TodoCheck checked={props.task.completed} />
       </Box>
       <Text
-        color={task.completed ? completedColor : color}
+        color={props.task.completed ? completedColor : color}
         fontSize={{ base: '12px', lg: '18px' }}
-        as={task.completed ? 's' : null}
+        as={props.task.completed ? 's' : null}
       >
-        {task.task}
+        {props.task.task}
       </Text>
       <Spacer />
       {hover ? (
         <CloseIcon
           color={closeIconColor}
           alignSelf="center"
-          onClick={() => dispatch(actions.remove_todo(task.id))}
+          onClick={() => dispatch(actions.remove_todo(props.task.id))}
+          cursor="initial"
         />
       ) : null}
     </Flex>
   );
-};
+});
 
 export default Todo;

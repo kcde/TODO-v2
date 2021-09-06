@@ -10,6 +10,9 @@ const todoReducer = (state = initialState, action) => {
       return state.map((todo) =>
         todo.id === action.payload ? { ...todo, completed: true } : { ...todo }
       );
+    case 'UPDATE LIST ORDER':
+      //? payload should be a new array which has already been reordered
+      return action.payload;
     case 'CLEAR COMPLETED':
       return state.filter((todo) => todo.completed === false);
 

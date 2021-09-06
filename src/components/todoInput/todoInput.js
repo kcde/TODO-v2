@@ -17,7 +17,7 @@ const TodoInput = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const new_todo = { id: Date.now(), task: textValue, completed: false };
+    const new_todo = { id: Date.now().toString(), task: textValue, completed: false };
     dispatch(actions.add_todo(new_todo));
     setTextValue('');
   };

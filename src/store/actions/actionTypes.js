@@ -5,3 +5,4 @@ export const clear_completed = 'CLEAR COMPLETED';
 export const filter_all = 'FILTER ALL';
 export const filter_active = 'FILTER ACTIVE';
 export const filter_completed = 'FILTER COMPLETED';
+export const update_list_order = 'UPDATE LIST ORDER';

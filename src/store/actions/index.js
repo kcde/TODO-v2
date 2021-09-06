@@ -38,3 +38,9 @@ export const filter_completed = () => {
     type: actionTypes.filter_completed,
   };
 };
+export const update_list_order = (newList) => {
+  return {
+    type: actionTypes.update_list_order,
+    payload: newList,
+  };
+};
