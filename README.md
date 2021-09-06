@@ -18,7 +18,7 @@ I want users to be able to create acounts and save their list. This would also b
 
 - [x] Build UI
 - [x] Make components functional
-- [ ] Drag and drop to re-arrange
+- [x] Drag and drop to re-arrange
 - [x] Add store using redux
 - [ ] Hook up to firebase
 - [ ] Add authentication and authorization
