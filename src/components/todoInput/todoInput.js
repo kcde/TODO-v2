@@ -4,7 +4,7 @@ import { EditIcon } from '@chakra-ui/icons';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../store/actions';
 
-const TodoInput = () => {
+const TodoInput = ({ disableInput }) => {
   const dispatch = useDispatch();
   const [textValue, setTextValue] = useState('');
   const inputBox = useRef();
@@ -24,7 +24,7 @@ const TodoInput = () => {
   return (
     <Flex
       py={{ base: '14px', lg: '20px' }}
-      pl={{ base: '20px', lg: '24px' }}
+      px={{ base: '20px', lg: '24px' }}
       mb={{ base: '16px', lg: '24px' }}
       bg={useColorModeValue('white', 'todoBlue.600')}
       alignItems="center"
@@ -35,7 +35,7 @@ const TodoInput = () => {
         {' '}
         <EditIcon h="24px" w="24px" color="todoBlue.200" mr={{ base: '12px', lg: '24px' }} />
       </Box>
-      <form onSubmit={(e) => submitHandler(e)}>
+      <form onSubmit={(e) => submitHandler(e)} style={{ width: '100%' }}>
         <Input
           value={textValue}
           onChange={(e) => setTextValue(e.target.value)}
@@ -44,9 +44,10 @@ const TodoInput = () => {
           variant="unstyled"
           fontSize={{ base: '12px', lg: '18px' }}
           w="full"
-          placeholder="Create a new todo...."
+          placeholder={!disableInput ? 'Create a todo profile' : 'Create a new todo....'}
           style={{ caretColor: caretColor }}
           ref={inputBox}
+          disabled={!disableInput}
         />
       </form>
     </Flex>
