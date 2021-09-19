@@ -14,7 +14,7 @@ import { useFormik } from 'formik';
 import { FormErrorIcon } from '@chakra-ui/form-control';
 import SubmitButton from '../submitButton';
 
-function LogInForm() {
+function LogInForm({ switchForm }) {
   const formValidation = (values) => {
     const errors = {};
     if (!values.email) {
@@ -88,6 +88,7 @@ function LogInForm() {
               cursor="pointer"
               textDecoration="underline"
               fontSize={{ base: 'sm', lg: 'lg' }}
+              onClick={switchForm}
             >
               Create account
             </Text>
