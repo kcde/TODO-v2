@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { auth, db } from '../../firebase';
+import { doc, setDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {
   Box,
   Text,
@@ -50,7 +53,20 @@ function SignUpForm({ switchForm }) {
     validate: formValidation,
 
     onSubmit: (values) => {
-      signUpForm.resetForm(values);
+      createUserWithEmailAndPassword(auth, values.email, values.password).then((cred) => {
+        const newDoc = doc(db, 'users', cred.user.uid);
+
+        setDoc(newDoc, {
+          username: values.username,
+          lists: [
+            { id: 'as', task: 'clean', completed: false },
+            { id: 'sa', task: 'clean', completed: false },
+            { id: 'ba', task: 'clean', completed: false },
+          ],
+        });
+
+        signUpForm.resetForm();
+      });
     },
   });
 

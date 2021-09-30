@@ -1,4 +1,7 @@
 import React from 'react';
+import { auth } from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import {
   Box,
   Text,
@@ -39,6 +42,7 @@ function LogInForm({ switchForm }) {
     },
     validate: formValidation,
     onSubmit: (values) => {
+      signInWithEmailAndPassword(auth, values.email, values.password);
       formik.resetForm();
     },
   });

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import * as actions from '../../../store/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Flex, Text, Box, useColorModeValue, Spacer } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import TodoCheck from './todoCheck';
+import { remove_todo, complete_todo } from '../../../store/reducers/TodoReducer';
 
 const Todo = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.authId);
   const bg = useColorModeValue('white', 'todoBlue.600');
   const [hover, setHover] = useState(false);
   const closeIconColor = useColorModeValue('todoBlue.200', 'todoBlue.400');
@@ -28,7 +29,7 @@ const Todo = React.forwardRef((props, ref) => {
     >
       <Box
         pr={{ base: '12px', lg: '24px' }}
-        onClick={() => dispatch(actions.complete_todo(props.task.id))}
+        onClick={props.task.completed ? null : () => dispatch(complete_todo(props.task.id, userId))}
       >
         <TodoCheck checked={props.task.completed} />
       </Box>
@@ -44,7 +45,7 @@ const Todo = React.forwardRef((props, ref) => {
         <CloseIcon
           color={closeIconColor}
           alignSelf="center"
-          onClick={() => dispatch(actions.remove_todo(props.task.id))}
+          onClick={() => dispatch(remove_todo(props.task.id, userId))}
           cursor="initial"
         />
       ) : null}

@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Box, Flex, Input, useColorModeValue } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
-import { useDispatch } from 'react-redux';
-import * as actions from '../../store/actions';
-
+import { useSelector } from 'react-redux';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db } from '../../firebase';
 const TodoInput = ({ disableInput }) => {
-  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.authId);
   const [textValue, setTextValue] = useState('');
   const inputBox = useRef();
   const focusHandler = () => {
@@ -17,9 +17,23 @@ const TodoInput = ({ disableInput }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const new_todo = { id: Date.now().toString(), task: textValue, completed: false };
-    dispatch(actions.add_todo(new_todo));
+    // const new_todo = { id: Date.now().toString(), task: textValue, completed: false };
+    // dispatch(actions.add_todo(new_todo));
+    add_todo();
     setTextValue('');
+  };
+
+  const add_todo = (todo, id) => {
+    //create todo object {task, id,completed}
+    const new_todo = { id: Date.now().toString(), task: textValue, completed: false };
+
+    // get userDoc
+    const userDoc = doc(db, 'users', userId);
+    updateDoc(userDoc, {
+      lists: arrayUnion(new_todo),
+    });
+
+    //save todo to user specific account
   };
   return (
     <Flex

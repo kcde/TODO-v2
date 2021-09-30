@@ -6,12 +6,14 @@ export const add_todo = (todo) => {
     payload: todo,
   };
 };
-export const remove_todo = (id) => {
+
+export const set_todo = (todo) => {
   return {
-    type: actionTypes.remove_todo,
-    payload: id,
+    type: actionTypes.set_todo,
+    payload: todo,
   };
 };
+
 export const complete_todo = (id) => {
   return {
     type: actionTypes.complete_todo,
@@ -42,5 +44,12 @@ export const update_list_order = (newList) => {
   return {
     type: actionTypes.update_list_order,
     payload: newList,
+  };
+};
+
+export const set_user_id = (id = null) => {
+  return {
+    type: actionTypes.set_user_id,
+    payload: id,
   };
 };
