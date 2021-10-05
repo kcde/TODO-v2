@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -12,12 +12,33 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { FormErrorIcon } from '@chakra-ui/form-control';
 import SubmitButton from '../submitButton';
 
 function LogInForm({ switchForm }) {
+  const [formError, setFormError] = useState('');
+
+  const setError = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/wrong-password':
+        setFormError('Incorrect password');
+        break;
+      case 'auth/user-not-found':
+        setFormError('User not found');
+        break;
+      case 'auth/network-request-failed':
+        setFormError('Network request failed');
+        break;
+      default:
+        setFormError('something went wrong');
+    }
+  };
   const formValidation = (values) => {
     const errors = {};
     if (!values.email) {
@@ -42,8 +63,9 @@ function LogInForm({ switchForm }) {
     },
     validate: formValidation,
     onSubmit: (values) => {
-      signInWithEmailAndPassword(auth, values.email, values.password);
-      formik.resetForm();
+      signInWithEmailAndPassword(auth, values.email, values.password).catch((err) => {
+        setError(err.code);
+      });
     },
   });
   return (
@@ -51,6 +73,13 @@ function LogInForm({ switchForm }) {
       <Text align="center" fontSize="lg" mb={{ base: 6, lg: 4 }}>
         Log In
       </Text>
+
+      {formError ? (
+        <Alert status="error" mb={4} borderRadius="5px">
+          <AlertIcon />
+          <AlertDescription color="red.200">{formError}</AlertDescription>
+        </Alert>
+      ) : null}
       <form onSubmit={formik.handleSubmit}>
         <VStack spacing={6} position="relative">
           {' '}

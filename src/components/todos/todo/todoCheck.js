@@ -22,9 +22,11 @@ const TodoCheck = ({ checked }) => {
       justifyContent="center"
       w={{ base: '20px', lg: '24px' }}
       h={{ base: '20px', lg: '24px' }}
+      p="1px"
       bgGradient={gradient}
       borderRadius="full"
       cursor="pointer"
+      overflow="hidden"
     >
       {
         // see if checked is true
@@ -32,12 +34,10 @@ const TodoCheck = ({ checked }) => {
           <CheckIcon h="12px" color="todoGray.100" />
         ) : (
           <Flex
-            alignItems="center"
-            justifyContent="center"
-            w="90%"
-            h="90%"
+            w="100%"
+            h="100%"
             bgColor={bg}
-            borderRadius="inherit"
+            borderRadius="full"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
           ></Flex>

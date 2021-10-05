@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Flex, Text, Spacer, useColorModeValue, useMediaQuery } from '@chakra-ui/react';
-import * as actions from '../../store/actions';
 import Filters from './filters';
+import { clear_completed } from '../../store/reducers/TodoReducer';
 
 const Controls = () => {
   const [isLargerThan992] = useMediaQuery('(min-width: 992px)');
   const todos = useSelector((state) => state.TodoList);
+  const userId = useSelector((state) => state.authId);
   const dispatch = useDispatch();
 
   return (
@@ -26,7 +27,7 @@ const Controls = () => {
       <Text
         _hover={{ color: useColorModeValue('todoBlue.700', 'todoGray.100') }}
         cursor="pointer"
-        onClick={() => dispatch(actions.clear_completed())}
+        onClick={() => dispatch(clear_completed(userId))}
       >
         Clear Completed
       </Text>
