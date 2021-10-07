@@ -20,8 +20,8 @@ I want users to be able to create acounts and save their list. This would also b
 - [x] Make components functional
 - [x] Drag and drop to re-arrange
 - [x] Add store using redux
-- [ ] Hook up to firebase
-- [ ] Add authentication and authorization
+- [x] Hook up to firebase
+- [x] Add authentication and authorization
 - [ ] Add PWA requirements
 
 ## Lessons Learned
