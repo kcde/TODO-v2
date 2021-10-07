@@ -14,7 +14,6 @@ import {
   FormLabel,
   Alert,
   AlertIcon,
-  AlertTitle,
   AlertDescription,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
@@ -23,6 +22,8 @@ import SubmitButton from '../submitButton';
 
 function LogInForm({ switchForm }) {
   const [formError, setFormError] = useState('');
+
+  const formErrorColor = useColorModeValue('red.500', 'red.200');
 
   const setError = (errorCode) => {
     switch (errorCode) {
@@ -77,7 +78,7 @@ function LogInForm({ switchForm }) {
       {formError ? (
         <Alert status="error" mb={4} borderRadius="5px">
           <AlertIcon />
-          <AlertDescription color="red.200">{formError}</AlertDescription>
+          <AlertDescription color={formErrorColor}>{formError}</AlertDescription>
         </Alert>
       ) : null}
       <form onSubmit={formik.handleSubmit}>

@@ -37,6 +37,7 @@ function App() {
   const authUser = useSelector((state) => state.authId);
   //! test
   const [isAuth, setIsAuth] = useState(false);
+  const [authStatus, setAuthStatus] = useState(false);
   const backgroundImageSelector = (colorMode) => {
     switch (colorMode) {
       case 'light':
@@ -63,14 +64,25 @@ function App() {
     });
   };
 
+  let userForm;
+
+  if (isAuth) {
+    userForm = (
+      <>
+        <Todos /> <Controls />
+      </>
+    );
+  } else {
+    userForm = <UserForm />;
+  }
+
   //check if a user is logged in
   useEffect(() => {
     const unsubscibe = onAuthStateChanged(auth, (user) => {
+      setAuthStatus(true);
       if (user) {
-        if (!isAuth) {
-          setIsAuth(true);
-          dispatch(set_user_id(user.uid));
-        }
+        setIsAuth(true);
+        dispatch(set_user_id(user.uid));
       } else {
         setIsAuth(false);
         dispatch(set_user_id());
@@ -112,19 +124,11 @@ function App() {
         <TodoInput disableInput={isAuth} />
         <Box borderRadius="md" boxShadow="2xl" style={{ overflow: 'hidden' }}>
           {/* if authenticated show todos and controls else sign on */}
-          {isAuth ? (
-            <>
-              <Todos />
-              <Controls />
-            </>
-          ) : (
-            <UserForm />
-          )}
+          {authStatus ? userForm : null}
         </Box>
-
         {
           //checking if windows is larger than 992px
-          !isLargerThan992 && auth ? (
+          !isLargerThan992 && isAuth ? (
             <Flex
               justifyContent="center"
               pt="15px"
@@ -138,7 +142,6 @@ function App() {
             </Flex>
           ) : null
         }
-
         <Text
           color={useColorModeValue('todoGray.400', 'todoBlue.400')}
           mt={{ base: '40px', lg: '49px' }}

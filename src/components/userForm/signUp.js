@@ -15,6 +15,9 @@ import {
   FormErrorMessage,
   InputGroup,
   InputRightElement,
+  Alert,
+  AlertIcon,
+  AlertDescription,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { FormErrorIcon } from '@chakra-ui/form-control';
@@ -23,6 +26,21 @@ import SubmitButton from '../submitButton';
 
 function SignUpForm({ switchForm }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [formError, setFormError] = useState('');
+  const formErrorColor = useColorModeValue('red.500', 'red.200');
+
+  const setError = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        setFormError('Email already in use');
+        break;
+      case 'auth/network-request-failed':
+        setFormError('Network request failed');
+        break;
+      default:
+        setFormError('something went wrong');
+    }
+  };
 
   const formValidation = (values) => {
     const errors = {};
@@ -53,20 +71,25 @@ function SignUpForm({ switchForm }) {
     validate: formValidation,
 
     onSubmit: (values) => {
-      createUserWithEmailAndPassword(auth, values.email, values.password).then((cred) => {
-        const newDoc = doc(db, 'users', cred.user.uid);
+      createUserWithEmailAndPassword(auth, values.email, values.password)
+        .then((cred) => {
+          const newDoc = doc(db, 'users', cred.user.uid);
 
-        setDoc(newDoc, {
-          username: values.username,
-          lists: [
-            { id: 'as', task: 'clean', completed: false },
-            { id: 'sa', task: 'clean', completed: false },
-            { id: 'ba', task: 'clean', completed: false },
-          ],
+          setDoc(newDoc, {
+            username: values.username,
+            lists: [
+              { id: 'as', task: 'Drink Water', completed: false },
+              { id: 'sa', task: 'Complete my project', completed: false },
+              { id: 'ba', task: 'Live, Love, Laugh', completed: false },
+            ],
+          });
+
+          signUpForm.resetForm();
+        })
+        .catch((err) => {
+          console.log(err.code);
+          setError(err.code);
         });
-
-        signUpForm.resetForm();
-      });
     },
   });
 
@@ -75,6 +98,13 @@ function SignUpForm({ switchForm }) {
       <Text align="center" fontSize="lg" mb={{ base: 6, lg: 4 }}>
         Sign up
       </Text>
+
+      {formError ? (
+        <Alert status="error" mb={4} borderRadius="5px">
+          <AlertIcon />
+          <AlertDescription color={formErrorColor}>{formError}</AlertDescription>
+        </Alert>
+      ) : null}
 
       <form onSubmit={signUpForm.handleSubmit}>
         <VStack spacing="6" position="relative">
