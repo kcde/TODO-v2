@@ -35,7 +35,6 @@ function App() {
   const filtersBg = useColorModeValue('white', 'todoBlue.600');
   const filtersColor = useColorModeValue('todoGray.400', 'todoBlue.400');
   const authUser = useSelector((state) => state.authId);
-  //! test
   const [isAuth, setIsAuth] = useState(false);
   const [authStatus, setAuthStatus] = useState(false);
   const backgroundImageSelector = (colorMode) => {
